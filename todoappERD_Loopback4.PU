@@ -1,0 +1,50 @@
+@startuml
+entity "Admins" as admins {
+    + id: string <<PK>>
+    + projectId: string <<FK>>
+    + taskId: string <<FK>>
+    + userName: string
+    + email: string
+    + password: string
+    + role: string 
+    + createdAt: date
+}
+
+entity "Projects" as projects {
+    + id: string <<PK>>
+    + adminId: string <<FK>>
+    + name: string
+    + state: string
+    + createdBy: string
+    + createdAt: date
+    + idTags: string
+}
+
+entity "Tasks" as tasks {
+    + id: string <<PK>>
+    + adminId: string <<FK>>
+    + userId: string <<FK>>
+    + name: string
+    + state: string
+    + assignees: string
+    + priority: string
+    + createdBy: string
+    + createdAt: date
+    + startDate: date
+    + dueDate: date
+    + labels: string
+}
+
+entity "Users" as users {
+    + id: string <<PK>>
+    + taskId: string <<FK>>
+    + userName: string
+    + email: string
+    + password: string
+    + role: string 
+    + joinedAt: date
+}
+users "1" -- "n" tasks
+admins "1" -- "n" tasks
+admins "1" -- "n" projects
+@enduml
